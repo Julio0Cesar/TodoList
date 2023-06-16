@@ -1,24 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import Header from './components/Header';
+import Footer from './components/Footer';
+import TaskForm from './components/TaskForm';
+import TaskList from './components/TaskList';
+import stylesModal from "./components/Modal.module.scss";
+import Modal from './components/Modal';
+import styles from './styles/Global.scss'
+
+import {ITask} from './interfaces/Task'
 
 function App() {
+  const [taskList, setTaskList] = useState<ITask[]>([])
+  const [taskToUpdate, setTaskToUpdate] = useState<ITask | null>(null)
+  
+  const deleteTask = (id: number) => {
+    setTaskList(
+      taskList.filter((task)=>{
+        return task.id !== id
+      })
+    )
+  }
+
+  const hideOrShowModal = (display: boolean) => {
+    const modal = document.querySelector("#modal")
+    if(display){
+      modal!.classList.remove(stylesModal.hide)
+    }else {
+      modal!.classList.add(stylesModal.hide)
+    }
+  }
+
+  const editTask = (task: ITask):void =>{
+    hideOrShowModal(true)
+    setTaskToUpdate(task)
+}
+
+  const updateTask = (id: number, title: string, difficulty: number | undefined ) =>{
+    const updatedTask: ITask = {id, title, difficulty}
+
+    const updatedItems = taskList.map((task)=> {
+      return task.id === updatedTask.id ? updatedTask : task
+    })
+    setTaskList(updatedItems)
+    hideOrShowModal(false)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <Modal title='Editar Tarefa' children={<TaskForm btnText="Editar tarefa" taskList={taskList} task={taskToUpdate} handleUpdate={updateTask}/>} />
+      <Header/>
+          <TaskForm btnText="Criar tarefa" taskList={taskList} setTaskList={setTaskList}/>
+          <TaskList taskList={taskList} handleDelete={deleteTask} handleEdit={editTask}/>
+      <Footer/>
     </div>
   );
 }
