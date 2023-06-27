@@ -1,6 +1,6 @@
 import React, {useState, ChangeEvent, FormEvent, useEffect} from 'react'
 import styles from './TaskForm.module.scss'
-import {ITask} from '../interfaces/Task'
+import {ITask} from '../../interfaces/Task'
 
 interface Props {
     btnText: string
@@ -52,11 +52,11 @@ const TaskForm = ({btnText, taskList, setTaskList, task, handleUpdate}: Props) =
     }
   return (
     <form className={styles.form} onSubmit={addTaskHandle}>
-        <div className={styles.title}>
+        <div className={styles.label}>
             <label htmlFor='title'>Titulo: </label>
             <input required type='text' name='title' autoComplete='off' placeholder='Titulo da tarefa' onChange={handleChange} value={title}/>
         </div>
-        <div className={styles.difficulty}>
+        <div className={styles.label}>
             <label htmlFor='difficulty'>Dificuldade: </label>
             <input type='text' name='difficulty' autoComplete='off' placeholder='Dificuldade da tarefa' onChange={handleChange} value={difficulty}/>
         </div>

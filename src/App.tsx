@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import Header from './components/Header';
-import Footer from './components/Footer';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
-import stylesModal from "./components/Modal.module.scss";
-import Modal from './components/Modal';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import TaskForm from './components/taskForm/TaskForm';
+import TaskList from './components/taskList/TaskList';
+import stylesModal from "./components/modal/Modal.module.scss";
+import Modal from './components/modal/Modal';
 import styles from './styles/Global.scss'
 
 import {ITask} from './interfaces/Task'
@@ -47,11 +47,11 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <Modal title='Editar Tarefa' children={<TaskForm btnText="Editar tarefa" taskList={taskList} task={taskToUpdate} handleUpdate={updateTask}/>} />
-      <Header/>
-          <TaskForm btnText="Criar tarefa" taskList={taskList} setTaskList={setTaskList}/>
-          <TaskList taskList={taskList} handleDelete={deleteTask} handleEdit={editTask}/>
-      <Footer/>
+      <Modal children={<TaskForm btnText="Editar tarefa" taskList={taskList} task={taskToUpdate} handleUpdate={updateTask}/>} />
+        <Header/>
+            <TaskForm btnText="Criar tarefa" taskList={taskList} setTaskList={setTaskList}/>
+            <TaskList taskList={taskList} handleDelete={deleteTask} handleEdit={editTask}/>
+        <Footer/>
     </div>
   );
 }

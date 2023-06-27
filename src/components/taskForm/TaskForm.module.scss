@@ -1,25 +1,24 @@
 .form{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
-    margin-top: 150px;
-
-    h2{
-
-    }
-    .title{
+    margin-top: 100px;
+    .label{
         display: flex;
         flex-direction: column;
-    }
-    .difficulty{
-        display: flex;
-        flex-direction: column;
+        input{
+            border-radius: 5px;
+            width: 250px;
+            height: 45px;
+            outline: none;
+            border: 1px solid black;
+        }
     }
     .btn{
         margin-top: 20px;
-        border-radius: 5px;
         input{
+            border-radius: 5px;
             width: 120px;
             height: 43px;
             cursor: pointer;               
@@ -36,12 +35,4 @@
         }
     }
 
-    input{
-        border-radius: 5px;
-        width: 250px;
-        height: 45px;
-        margin-right: 10px;
-        outline: none;
-        border: 1px solid black;
-    }
 }
